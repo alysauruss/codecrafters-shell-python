@@ -37,12 +37,12 @@ def main():
         else:
             for directory in PATH:
                 full_path = os.path.join(directory, command)
-                if os.path.exists(full_path):
+                if os.path.exists(full_path.split()[0]):
                     if not os.access(full_path, os.X_OK):
                         continue
                     else:
                         # print(f"{command} is {full_path}")
-                        subprocess.run(command.split())
+                        subprocess.run(full_path)
                         break
                 else:
                     print(f"{command}: command not found")
