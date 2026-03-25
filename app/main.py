@@ -10,6 +10,9 @@ def main():
         sys.stdout.write("$ ")
         # user input
         command = input()
+        parts = command.split()
+        program_name = parts[0]
+        args = parts[1:]
         if command == "exit":
             break
         elif command.startswith("echo "):
@@ -36,16 +39,17 @@ def main():
                     print(f"{command[5:]}: not found")
         else:
             for directory in PATH:
-                full_path = os.path.join(directory, command)
-                if os.path.exists(full_path.split()[0]):
+                full_path = os.path.join(directory, parts[0])
+                if os.path.exists(full_path):
                     if not os.access(full_path, os.X_OK):
                         continue
                     else:
                         # print(f"{command} is {full_path}")
-                        subprocess.run(full_path)
+                        subprocess.run(program_name + args, executable=full_path)
                         break
                 else:
                     print(f"{command}: command not found")
+                    break
 
 if __name__ == "__main__":
     main()
