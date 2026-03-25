@@ -30,13 +30,22 @@ def main():
                         if not os.access(full_path, os.X_OK):
                             continue
                         else:
-                            # print(f"{command[5:]} is {full_path}")
-                            subprocess.run(full_path)
+                            print(f"{command[5:]} is {full_path}")
                             break
                 else:
                     print(f"{command[5:]}: not found")
         else:
-            print(f"{command}: command not found")
+            for directory in PATH:
+                full_path = os.path.join(directory, command)
+                if os.path.exists(full_path):
+                    if not os.access(full_path, os.X_OK):
+                        continue
+                    else:
+                        # print(f"{command} is {full_path}")
+                        subprocess.run(full_path)
+                        break
+                else:
+                    print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
