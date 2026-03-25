@@ -5,10 +5,6 @@ builtin_commands = ["echo", "exit", "type"]
 PATH = os.environ["PATH"].split(os.pathsep)
 
 def main():
-    print("Welcome to the simple shell! Type 'exit' to quit.")
-    print("Available built-in commands: echo, exit, type")
-    print("You can also run any executable in your PATH.")
-    print(PATH)
     while True:
         sys.stdout.write("$ ")
         # user input
@@ -28,7 +24,7 @@ def main():
                 # os.pathsep is used to separate the diff paths and 
                 # gives you a list of directory strings
                 for directory in PATH:
-                    full_path = os.path.join(directory, command)
+                    full_path = os.path.join(directory, command[5:])
                     if os.path.exists(full_path):
                         if not os.access(full_path, os.X_OK):
                             continue
