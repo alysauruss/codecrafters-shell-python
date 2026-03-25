@@ -29,7 +29,7 @@ def main():
                         if not os.access(full_path, os.X_OK):
                             continue
                         else:
-                            print(f"{command[5:]} is {directory}")
+                            print(f"{command[5:]} is {full_path}")
                             break
                 else:
                     print(f"{command[5:]}: not found")
