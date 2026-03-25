@@ -3,7 +3,7 @@ import sys
 def main():
     while True:
         sys.stdout.write("$ ")
-        # user input
+        # Wait for user input
         command = input()
         if command == "exit":
             break
@@ -11,6 +11,6 @@ def main():
             print(command[5:])
         else:
             print(f"{command}: command not found")
-
+            
 if __name__ == "__main__":
     main()
