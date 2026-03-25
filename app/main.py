@@ -42,7 +42,7 @@ def main():
                         continue
                     else:
                         # print(f"{command} is {full_path}")
-                        subprocess.run(full_path)
+                        subprocess.run(command.split())
                         break
                 else:
                     print(f"{command}: command not found")
