@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 builtin_commands = ["echo", "exit", "type"]
 PATH = os.environ["PATH"].split(os.pathsep)
@@ -29,7 +30,8 @@ def main():
                         if not os.access(full_path, os.X_OK):
                             continue
                         else:
-                            print(f"{command[5:]} is {full_path}")
+                            # print(f"{command[5:]} is {full_path}")
+                            subprocess.run(full_path)
                             break
                 else:
                     print(f"{command[5:]}: not found")
