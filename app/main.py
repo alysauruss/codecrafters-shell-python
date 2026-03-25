@@ -8,12 +8,15 @@ def main():
         if command == "exit":
             break
         elif command.startswith("echo "):
+            # this is the text after echo
+            # echo [text]
             print(command[5:])
         elif command.startswith("type "):
+            # if input is within the shell builtin commands
             if command[5:] in ["echo", "exit", "type"]:
-                print(f"{command[5:]} is a built-in command")
+                print(f"{command[5:]} is a shell builtin")
             else:
-                print(f"{command[5:]} is not a built-in command")
+                print(f"{command[5:]} is not a shell builtin")
         else:
             print(f"{command}: command not found")
 
