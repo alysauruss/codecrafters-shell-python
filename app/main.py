@@ -1,6 +1,14 @@
 import sys
+import os
+
+builtin_commands = ["echo", "exit", "type"]
+PATH = os.environ["PATH"].split(os.pathsep)
 
 def main():
+    print("Welcome to the simple shell! Type 'exit' to quit.")
+    print("Available built-in commands: echo, exit, type")
+    print("You can also run any executable in your PATH.")
+    print(PATH)
     while True:
         sys.stdout.write("$ ")
         # user input
@@ -13,10 +21,22 @@ def main():
             print(command[5:])
         elif command.startswith("type "):
             # if input is within the shell builtin commands
-            if command[5:] in ["echo", "exit", "type"]:
+            if command[5:] in builtin_commands:
                 print(f"{command[5:]} is a shell builtin")
             else:
-                print(f"{command[5:]}: not found")
+                # os.environ["PATH"] is a big plain string, 
+                # os.pathsep is used to separate the diff paths and 
+                # gives you a list of directory strings
+                for directory in PATH:
+                    full_path = os.path.join(directory, command)
+                    if os.path.exists(full_path):
+                        if not os.access(full_path, os.X_OK):
+                            continue
+                        else:
+                            print(f"{command[5:]} is {directory}")
+                            break
+                else:
+                    print(f"{command[5:]}: not found")
         else:
             print(f"{command}: command not found")
 
